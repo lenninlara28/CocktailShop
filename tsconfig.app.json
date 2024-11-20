@@ -20,7 +20,21 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /*config model*/
+    "baseUrl": "./src",
+    "paths": {
+      "@assets": ["./assets/index.ts"],
+      "@components": ["./components/index.ts"],
+      "@hooks": ["./hooks/index.ts"],
+      "@pages": ["./pages/index.ts"],
+      "@routes": ["./routes/index.ts"],
+      "@api": ["./api/index.ts"],
+      "@stores": ["./stores/index.ts"],
+      "@utils": ["./utils/index.ts"],
+      "@interfaces": ["./interfaces/index.ts"]
+    }
   },
   "include": ["src"]
 }
