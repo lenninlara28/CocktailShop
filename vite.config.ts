@@ -15,7 +15,6 @@ export default defineConfig({
       "@api": path.resolve(__dirname, "./src/api/index.ts"),
       "@stores": path.resolve(__dirname, "./src/stores/index.ts"),
       "@utils": path.resolve(__dirname, "./src/utils/index.ts"),
-      "@interfaces": path.resolve(__dirname, "./src/interfaces/index.ts"),
     },
   },
 });

@@ -32,8 +32,7 @@
       "@routes": ["./routes/index.ts"],
       "@api": ["./api/index.ts"],
       "@stores": ["./stores/index.ts"],
-      "@utils": ["./utils/index.ts"],
-      "@interfaces": ["./interfaces/index.ts"]
+      "@utils": ["./utils/index.ts"]
     }
   },
   "include": ["src"]
