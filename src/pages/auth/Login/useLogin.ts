@@ -3,6 +3,7 @@ import { useUserStore } from "@stores";
 import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { IUserDummy } from "../../../interfaces/general";
+import bycrypt from "bcryptjs";
 
 interface IFormLogin {
   email: string;
@@ -50,7 +51,7 @@ export default () => {
 
     try {
       const db_dummy: IUserDummy | undefined = dataDummy.users.find(
-        (item) => item.email === form.email && item.password === form.password
+        (item) => item.email === form.email
       );
 
       if (!db_dummy) {
@@ -58,6 +59,12 @@ export default () => {
           variant: "error",
         });
         return;
+      }
+
+      if (!(await bycrypt.compare(form.password, db_dummy.password))) {
+        return enqueueSnackbar("Contraseña incorrecta", {
+          variant: "error",
+        });
       }
 
       const data = await loadApi<IRespondeSignIn>({

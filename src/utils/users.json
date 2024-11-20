@@ -5,7 +5,7 @@
       "nombres": "Admin",
       "apellidos": "cocktail",
       "email": "admin@cocktail.co",
-      "password": "1",
+      "password": "$2a$10$JdMvdsoEP2Zaa5usORDVX.vRgd6V66FyRQZKGoAcPTA3V0d8F9Esm",
       "dummyAuthEmail": "emilys",
       "dummyAuthPassword": "emilyspass"
     }

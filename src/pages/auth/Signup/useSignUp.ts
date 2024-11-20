@@ -3,6 +3,7 @@ import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import dataDummy from "../../../utils/users.json";
 import { useUserStore } from "@stores";
+import bcrypt from "bcryptjs";
 
 interface IFormLogin {
   nombres: string;
@@ -56,12 +57,14 @@ export default () => {
         return;
       }
 
+      const bcryptPassword = await bcrypt.hash(form.password, 10);
+
       db_dummy.users.push({
         id: db_dummy.users.length + 1,
         nombres: form.nombres,
         apellidos: form.apellidos,
         email: form.email,
-        password: form.password,
+        password: bcryptPassword,
         dummyAuthEmail: "emilys",
         dummyAuthPassword: "emilyspass",
       });
