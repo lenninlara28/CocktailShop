@@ -9,7 +9,7 @@ export const SignUp = () => {
           backgroundImage: `url(${BackgroundImg})`,
         }}
       >
-        <div className="flex flex-col justify-center items-center bg-white w-screen rounded-3xl lg:w-2/5">
+        <div className="flex flex-col justify-center items-center bg-white w-screen rounded-3xl lg:w-2/5 md:w-1/2">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
               Registrate

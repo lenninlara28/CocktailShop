@@ -33,10 +33,8 @@ export interface IErrors {
 
 export const useApi = () => {
   const [loadingApi, setLoading] = useState<string[]>([]);
-  const { localToken } = useUserStore((state) => ({
-    localToken: state.token,
-    logOut: state.logOut,
-  }));
+  const localToken = useUserStore((state) => state.token);
+  // const logOut = useUserStore((state) => state.logOut);
 
   const loadApi = async <R extends object>({
     type = "GET",
@@ -114,6 +112,6 @@ export const useApi = () => {
   return {
     loadApi,
     loadingApi,
-    loggedApi: Boolean(localToken),
+    /*  loggedApi: Boolean(localToken), */
   };
 };

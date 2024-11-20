@@ -16,7 +16,6 @@ const storeAPI: StateCreator<State & Action, [["zustand/devtools", never]]> = (
   ...initialState,
   signIn: (data: ISignInProps) => set(() => data, false, "signIn"),
   logOut: () => set(() => initialState, false, "logOut"),
-
   updateUser: (user: User) => set(() => ({ user }), false, "updateUser"),
 });
 

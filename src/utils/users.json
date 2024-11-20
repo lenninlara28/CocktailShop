@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nombres": "Admin",
+      "apellidos": "cocktail",
+      "email": "admin@cocktail.co",
+      "password": "1",
+      "dummyAuthEmail": "emilys",
+      "dummyAuthPassword": "emilyspass"
+    }
+  ]
+}
