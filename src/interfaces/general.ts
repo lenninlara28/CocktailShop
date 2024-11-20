@@ -24,4 +24,5 @@ export interface IUserDummy {
   password: string;
   dummyAuthEmail: string;
   dummyAuthPassword: string;
+  username?: string;
 }

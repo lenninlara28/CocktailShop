@@ -1,11 +1,22 @@
+import { Backdrop } from "@components";
 import BackgroundImg from "../../../assets/background-img.png";
-import useSignup from "./useSignup";
+import useSignup from "./useSignUp";
 
 export const SignUp = () => {
-  const { nombres, apellidos, email, password, onChange, onSignUp, goSignIn } =
-    useSignup();
+  const {
+    nombres,
+    apellidos,
+    email,
+    password,
+    onChange,
+    onSignUp,
+    goSignIn,
+    loading,
+  } = useSignup();
+
   return (
     <>
+      <Backdrop isLoading={loading} />
       <div
         className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-screen h-screen bg-no-repeat bg-cover items-center "
         style={{
