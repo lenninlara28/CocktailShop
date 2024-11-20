@@ -2,7 +2,6 @@ import { useForm, useApi } from "@hooks";
 import { useUserStore } from "@stores";
 import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import dataDummy from "../../../utils/users.json";
 import { IUserDummy } from "../../../interfaces/general";
 
 interface IFormLogin {
@@ -41,6 +40,8 @@ export default () => {
     useForm<IFormLogin, IFormLoginValidator>(inicialState, validators);
 
   const signIn = useUserStore(({ signIn }) => signIn);
+  const dataDummy = useUserStore((state) => state.dummyUsers);
+
   const { loadApi, loadingApi } = useApi();
   const navigate = useNavigate();
 
@@ -91,6 +92,10 @@ export default () => {
     }
   };
 
+  const goSignUp = () => {
+    navigate("/auth/sign-up");
+  };
+
   return {
     email,
     password,
@@ -99,6 +104,7 @@ export default () => {
     onChange,
     validateFieldsText,
     onLogin,
+    goSignUp,
     loading: loadingApi.includes("POST__login"),
   };
 };

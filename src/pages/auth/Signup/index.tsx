@@ -1,6 +1,9 @@
 import BackgroundImg from "../../../assets/background-img.png";
+import useSignup from "./useSignup";
 
 export const SignUp = () => {
+  const { nombres, apellidos, email, password, onChange, onSignUp, goSignIn } =
+    useSignup();
   return (
     <>
       <div
@@ -17,7 +20,7 @@ export const SignUp = () => {
           </div>
 
           <div className="mt-10 mb-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" className="space-y-6">
+            <form onSubmit={onSignUp} className="space-y-6">
               <div>
                 <label
                   htmlFor="text"
@@ -28,9 +31,11 @@ export const SignUp = () => {
                 <div className="mt-2">
                   <input
                     id="name"
-                    name="name"
+                    name="nombres"
                     type="text"
                     required
+                    value={nombres}
+                    onChange={(e) => onChange(e, "nombres")}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
                   />
                 </div>
@@ -46,9 +51,11 @@ export const SignUp = () => {
                 <div className="mt-2">
                   <input
                     id="lastname"
-                    name="lastname"
+                    name="apellidos"
                     type="text"
                     required
+                    value={apellidos}
+                    onChange={(e) => onChange(e, "apellidos")}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
                   />
                 </div>
@@ -66,7 +73,8 @@ export const SignUp = () => {
                     name="email"
                     type="email"
                     required
-                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => onChange(e, "email")}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
                   />
                 </div>
@@ -87,7 +95,8 @@ export const SignUp = () => {
                     name="password"
                     type="password"
                     required
-                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => onChange(e, "password")}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
                   />
                 </div>
@@ -104,12 +113,12 @@ export const SignUp = () => {
             </form>
 
             <p className="mt-10 text-center text-sm/6 text-gray-500">
-              <a
-                href="/auth/login"
-                className="font-semibold text-indigo-600 hover:text-indigo-500"
+              <button
+                onClick={goSignIn}
+                className="font-semibold text-indigo-600 hover:text-indigo-500 bg-white hover:border-none"
               >
                 Iniciar Sesión
-              </a>
+              </button>
             </p>
           </div>
         </div>

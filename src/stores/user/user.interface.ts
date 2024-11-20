@@ -1,4 +1,4 @@
-import { User } from "interfaces/general";
+import { IUserDummy, User } from "interfaces/general";
 
 export interface ISignInProps {
   user: User;
@@ -8,9 +8,11 @@ export interface ISignInProps {
 export interface State {
   user: User | null;
   token: string | null;
+  dummyUsers: { users: IUserDummy[] };
 }
 
 export interface Action {
   signIn: (props: ISignInProps) => void;
-  logOut: () => void;
+  logOut: (props: State) => void;
+  signUp: (props: { users: IUserDummy[] }) => void;
 }
