@@ -99,8 +99,8 @@ export default () => {
     }
   };
 
-  const goSignUp = () => {
-    navigate("/auth/sign-up");
+  const navigation = (rute: string) => {
+    navigate(rute);
   };
 
   return {
@@ -111,7 +111,7 @@ export default () => {
     onChange,
     validateFieldsText,
     onLogin,
-    goSignUp,
+    navigation,
     loading: loadingApi.includes("POST__login"),
   };
 };

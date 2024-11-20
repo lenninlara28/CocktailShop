@@ -47,8 +47,6 @@ export default () => {
 
   const { loadApi, loadingApi } = useApi();
 
-  console.log(loadingApi);
-
   const onSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

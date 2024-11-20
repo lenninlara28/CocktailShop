@@ -126,7 +126,7 @@ export const SignUp = () => {
             <p className="mt-10 text-center text-sm/6 text-gray-500">
               <button
                 onClick={goSignIn}
-                className="font-semibold text-indigo-600 hover:text-indigo-500 bg-white hover:border-none"
+                className="font-semibold text-indigo-600 hover:text-indigo-500 bg-white hover:border-white"
               >
                 Iniciar Sesión
               </button>

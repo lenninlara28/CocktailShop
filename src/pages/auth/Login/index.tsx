@@ -3,7 +3,8 @@ import BackgroundImg from "../../../assets/background-img.png";
 import useLogin from "./useLogin";
 
 export const Login = () => {
-  const { email, password, loading, onChange, onLogin, goSignUp } = useLogin();
+  const { email, password, loading, onChange, onLogin, navigation } =
+    useLogin();
   return (
     <>
       <Backdrop isLoading={loading} />
@@ -47,14 +48,6 @@ export const Login = () => {
                   >
                     Password
                   </label>
-                  <div className="text-sm">
-                    <a
-                      href="#"
-                      className="font-semibold text-indigo-600 hover:text-indigo-500"
-                    >
-                      Cambiar contraseña?
-                    </a>
-                  </div>
                 </div>
                 <div className="mt-2">
                   <input
@@ -81,8 +74,8 @@ export const Login = () => {
 
             <p className="mt-10 text-center text-sm/6">
               <button
-                onClick={goSignUp}
-                className="font-semibold text-indigo-600 hover:text-indigo-500 bg-white hover:border-none"
+                onClick={() => navigation("/auth/sign-up")}
+                className="font-semibold text-indigo-600 hover:text-indigo-500 bg-white hover:border-white"
               >
                 Registrarse
               </button>
