@@ -28,6 +28,7 @@ export default () => {
   const [popularCocktail, setPopularCocktail] = useState<IProducts[]>();
   const [popularIngredients, setPopularIngredients] = useState<IProducts[]>();
   const [cocktails, setCocktails] = useState<IProducts[]>();
+  const [ingredients, setIngredients] = useState<IProducts[]>();
   const currentPopularCocktail = useUserStore(
     (state) => state.popularCocktails
   );
@@ -163,6 +164,39 @@ export default () => {
     }
   }, [loadApi]);
 
+  const getIngredients = useCallback(async () => {
+    try {
+      const ingredients: IProducts[] = [];
+
+      const data = await loadApi<IResponseCocktailAPI>({
+        type: "GET",
+        headers: {
+          "access-token": undefined,
+          "Content-Type": "application/json",
+        },
+        instance: "api_cocktail",
+        endpoint: "list.php?i=list",
+      });
+
+      data.drinks.slice(4).map((drinks) => {
+        ingredients.push({
+          id: "",
+          name: drinks.strIngredient1,
+          imageSrc: `https://www.thecocktaildb.com/images/ingredients/${drinks.strIngredient1}.png`,
+          imageAlt: drinks.strIngredient1,
+          price: "",
+          descriptions: "",
+        });
+      });
+
+      setIngredients(ingredients);
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
   useEffect(() => {
     if (currentPopularCocktail.length === 0) {
       getCocktailPopular();
@@ -172,6 +206,7 @@ export default () => {
 
     getIngredientsPopular();
     getCocktail();
+    getIngredients();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -179,6 +214,7 @@ export default () => {
     popularCocktail,
     popularIngredients,
     cocktails,
+    ingredients,
     goDetails,
     goDetailsIngredients,
     loading:

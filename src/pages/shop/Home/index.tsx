@@ -8,6 +8,7 @@ export const Home = () => {
     popularIngredients,
     loading,
     cocktails,
+    ingredients,
     goDetails,
     goDetailsIngredients,
   } = useHome();
@@ -85,15 +86,10 @@ export const Home = () => {
           Ingredientes
         </h2>
 
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {popularIngredients?.map((product) => (
-            <CardProduct
-              key={`ramdon-ingredients-${product.name}`}
-              product={product}
-              goDetails={goDetailsIngredients}
-            />
-          ))}
-        </div>
+        <SliderProduct
+          allCocktais={ingredients || []}
+          goDetails={goDetailsIngredients}
+        />
       </div>
     </div>
   );
