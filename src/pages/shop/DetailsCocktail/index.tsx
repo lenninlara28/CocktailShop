@@ -5,7 +5,7 @@ export const DetailsCocktail = () => {
   const { detailsCocktail, loading } = useDetailsCocktail();
 
   const breadcrumbs = [
-    { id: "1", name: "Cocteles Populares", href: "/home" },
+    { id: "1", name: "Home", href: "/home" },
     { id: "2", name: `${detailsCocktail?.name}`, href: "" },
   ];
 

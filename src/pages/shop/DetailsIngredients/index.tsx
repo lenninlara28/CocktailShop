@@ -8,7 +8,7 @@ export const DetailsIngredients = () => {
   const navigate = useNavigate();
 
   const breadcrumbs = [
-    { id: "1", name: "Ingredientes Populares", href: "/home" },
+    { id: "1", name: "Home", href: "/home" },
     { id: "2", name: `${detailsIngredient?.name}`, href: "" },
   ];
 
