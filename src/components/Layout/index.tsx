@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../../../public/cocktail.svg";
 import { useNavigate } from "react-router-dom";
 import { User } from "interfaces/general";
@@ -14,7 +14,9 @@ export const Layout: React.FC<Props> = ({ children, user, logout }) => {
   const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const refDrawer = useRef<HTMLDivElement>(null);
 
+  /*  buttons confir logout */
   const action = (snackbarId: SnackbarKey) => (
     <div className="flex gap-5">
       <button
@@ -37,6 +39,7 @@ export const Layout: React.FC<Props> = ({ children, user, logout }) => {
     </div>
   );
 
+  /* logout clic */
   const logoutSession = () => {
     setIsOpen(false);
     enqueueSnackbar("¿Seguro que desea cerrar sesión?", {
@@ -45,6 +48,19 @@ export const Layout: React.FC<Props> = ({ children, user, logout }) => {
       persist: true,
     });
   };
+
+  const handleClickoutMenuPopup = (e: MouseEvent) => {
+    if (refDrawer.current && !refDrawer.current.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickoutMenuPopup, true);
+    return () => {
+      document.addEventListener("click", handleClickoutMenuPopup, true);
+    };
+  }, []);
 
   return (
     <div className="flex w-screen h-screen flex-col">
@@ -84,7 +100,10 @@ export const Layout: React.FC<Props> = ({ children, user, logout }) => {
                 className="-m-1.5 p-1.5 flex flex-row items-center gap-3 cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <span className="text-white text-sm ">{user.nombres}</span>
+                <div className="flex flex-col">
+                  <span className="text-white text-sm">{user.nombres}</span>
+                  <span className="text-white text-xs">{user.email}</span>
+                </div>
                 <img
                   src={user.imagen}
                   alt="Avatar"
@@ -103,6 +122,7 @@ export const Layout: React.FC<Props> = ({ children, user, logout }) => {
             {/* Menu Drawe */}
             {isOpen && (
               <div
+                ref={refDrawer}
                 className={`absolute right-4 mt-12 w-30 bg-white rounded-lg shadow-lg`}
               >
                 <ul className="p-4 space-y-4">
