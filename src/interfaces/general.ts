@@ -36,3 +36,12 @@ export interface IProducts {
   price: string;
   descriptions: string;
 }
+
+export interface IDetailsCocktail {
+  name: string;
+  imageAlt: string;
+  imageSrc: string;
+  description: string;
+  ingredients: string[];
+  type: string;
+}

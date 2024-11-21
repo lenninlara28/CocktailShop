@@ -1,11 +1,12 @@
-import { CardProduct } from "@components";
+import { Backdrop, CardProduct } from "@components";
 import useHome from "./useHome";
 
 export const Home = () => {
-  const { popularCocktail, goDetails } = useHome();
+  const { popularCocktail, goDetails, loading } = useHome();
 
   return (
     <div className="bg-white overflow-x-hidden">
+      <Backdrop isLoading={loading} />
       <div className="p-10">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           Cocteles Populares

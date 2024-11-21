@@ -12,7 +12,7 @@ interface IResponseCocktailAPI {
     strDrink: string;
     strDrinkThumb: string;
     strMeasure4: string;
-    strInstructions: string;
+    strInstructionsES: string;
   }[];
 }
 
@@ -43,7 +43,7 @@ export default () => {
           imageSrc: drinks.strDrinkThumb,
           imageAlt: drinks.strDrink,
           price: "",
-          descriptions: drinks.strInstructions,
+          descriptions: drinks.strInstructionsES,
         });
       });
       setPopularCocktail(cocktail_populars);
@@ -56,7 +56,7 @@ export default () => {
 
   const goDetails = (rute: string) => {
     if (user) {
-      navigate(`/home/details/${encrypt(rute)}`);
+      navigate(`/home/details/cocktail/${encrypt(rute)}`);
     } else {
       return enqueueSnackbar(
         "Para obtener detalles del coctel debe iniciar sesión ",
@@ -76,6 +76,6 @@ export default () => {
   return {
     popularCocktail,
     goDetails,
-    loading: loadingApi.includes("POST__login"),
+    loading: loadingApi.includes("POST__random.php"),
   };
 };
