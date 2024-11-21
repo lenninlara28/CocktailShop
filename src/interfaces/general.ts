@@ -35,6 +35,9 @@ export interface IProducts {
   imageAlt: string;
   price: string;
   descriptions: string;
+  strDrinkThumb?: string;
+  idDrink?: string;
+  strDrink?: string;
 }
 
 export interface IDetailsCocktail {
@@ -44,4 +47,12 @@ export interface IDetailsCocktail {
   description: string;
   ingredients: string[];
   type: string;
+}
+
+export interface IDetailsIngredient {
+  name: string;
+  description: string;
+  type: string;
+  imageSrc: string;
+  cocktails: IProducts[];
 }

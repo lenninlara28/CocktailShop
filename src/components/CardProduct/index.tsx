@@ -4,22 +4,30 @@ import React from "react";
 interface CardProductProps {
   product: IProducts;
   goDetails: (idProduct: string) => void;
+  small?: boolean;
 }
 
 export const CardProduct: React.FC<CardProductProps> = ({
   product,
   goDetails,
+  small = false,
 }) => {
   return (
     <div
       key={product.id}
-      className="group relative cursor-pointer"
-      onClick={() => goDetails(product.id)}
+      className="group relative cursor-pointer max-h-sm"
+      onClick={() =>
+        goDetails(
+          product.id === "" ? `${product.name}*${product.imageSrc}` : product.id
+        )
+      }
     >
       <img
         alt={product.imageAlt}
         src={product.imageSrc}
-        className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+        className={`aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-${
+          small ? 48 : 80
+        }`}
       />
       <div className="mt-4 flex justify-between">
         <div>

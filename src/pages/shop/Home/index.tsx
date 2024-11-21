@@ -3,7 +3,13 @@ import useHome from "./useHome";
 import { useUserStore } from "@stores";
 
 export const Home = () => {
-  const { popularCocktail, popularIngredients, goDetails, loading } = useHome();
+  const {
+    popularCocktail,
+    popularIngredients,
+    loading,
+    goDetails,
+    goDetailsIngredients,
+  } = useHome();
 
   const setPopularCocktailsStorage = useUserStore(
     ({ setPopularCocktails }) => setPopularCocktails
@@ -54,7 +60,7 @@ export const Home = () => {
             <CardProduct
               key={`ingredients-${product.name}`}
               product={product}
-              goDetails={goDetails}
+              goDetails={goDetailsIngredients}
             />
           ))}
         </div>
