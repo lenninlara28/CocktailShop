@@ -1,7 +1,6 @@
 import { useApi, useForm } from "@hooks";
 import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import dataDummy from "../../../utils/users.json";
 import { useUserStore } from "@stores";
 import bcrypt from "bcryptjs";
 import { IUserDummy } from "interfaces/general";
@@ -40,6 +39,8 @@ export default () => {
     onChange,
     validateFieldsText,
   } = useForm<IFormLogin, IFormLoginValidator>(inicialState, validators);
+
+  const dataDummy = useUserStore((state) => state.dummyUsers);
 
   const signUp = useUserStore(({ signUp }) => signUp);
 
@@ -86,6 +87,7 @@ export default () => {
         dummyAuthEmail: data.users[id_new_user].username || "",
         dummyAuthPassword: data.users[id_new_user].password,
       });
+
       signUp(db_dummy);
 
       enqueueSnackbar(`Usuario registrado exitosamente.`, {
