@@ -27,3 +27,12 @@ export interface IUserDummy {
   dummyAuthPassword: string;
   username?: string;
 }
+
+export interface IProducts {
+  id: string;
+  name: string;
+  imageSrc: string;
+  imageAlt: string;
+  price: string;
+  descriptions: string;
+}
