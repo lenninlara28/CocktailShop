@@ -13,6 +13,7 @@ interface IResponseCocktailAPI {
     strDrinkThumb: string;
     strMeasure4: string;
     strInstructionsES: string;
+    strIngredient1: string;
   }[];
 }
 
@@ -21,6 +22,7 @@ export default () => {
   const { loadApi, loadingApi } = useApi();
   const navigate = useNavigate();
   const [popularCocktail, setPopularCocktail] = useState<IProducts[]>();
+  const [popularIngredients, setPopularIngredients] = useState<IProducts[]>();
   const currentPopularCocktail = useUserStore(
     (state) => state.popularCocktails
   );
@@ -71,7 +73,58 @@ export default () => {
     }
   };
 
+  const getIngredientsPopular = useCallback(async () => {
+    try {
+      /* In this case, the endpoint for getting a popular ingredients is premium, so I'll request four frist ingredients and save in localstorage. */
+      const ingredients_populars: IProducts[] = [];
+
+      const data = await loadApi<IResponseCocktailAPI>({
+        type: "GET",
+        headers: {
+          "access-token": undefined,
+          "Content-Type": "application/json",
+        },
+        instance: "api_cocktail",
+        endpoint: "list.php?i=list",
+      });
+
+      data.drinks
+        .filter((_, index) => index < 4)
+        .map((drinks) => {
+          ingredients_populars.push({
+            id: "",
+            name: drinks.strIngredient1,
+            imageSrc: `https://www.thecocktaildb.com/images/ingredients/${drinks.strIngredient1}.png`,
+            imageAlt: drinks.strIngredient1,
+            price: "",
+            descriptions: "",
+          });
+        });
+
+      setPopularIngredients(ingredients_populars);
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
+  const goDetailsIngredients = (rute: string) => {
+    if (user) {
+      navigate(`/home/details/ingredients/${encrypt(rute)}`);
+    } else {
+      return enqueueSnackbar(
+        "Para obtener detalles del ingrediente debe iniciar sesión ",
+        {
+          variant: "warning",
+          autoHideDuration: 3000,
+        }
+      );
+    }
+  };
+
   useEffect(() => {
+    getIngredientsPopular();
     if (currentPopularCocktail.length === 0) {
       getCocktailPopular();
     } else {
@@ -82,7 +135,9 @@ export default () => {
 
   return {
     popularCocktail,
+    popularIngredients,
     goDetails,
+    goDetailsIngredients,
     loading: loadingApi.includes("POST__random.php"),
   };
 };
