@@ -1,7 +1,10 @@
 import { SnackbarProvider } from "notistack";
 import { AppRouter } from "./routes";
+import { useUserStore } from "@stores";
 
 const App = () => {
+  useUserStore.persist.rehydrate();
+
   return (
     <SnackbarProvider
       style={{ borderRadius: "16px" }}
