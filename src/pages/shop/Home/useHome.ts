@@ -17,12 +17,17 @@ interface IResponseCocktailAPI {
   }[];
 }
 
+interface IRespoonseAllCocktails {
+  drinks: IProducts[];
+}
+
 export default () => {
   const user = useUserStore((state) => state.user);
   const { loadApi, loadingApi } = useApi();
   const navigate = useNavigate();
   const [popularCocktail, setPopularCocktail] = useState<IProducts[]>();
   const [popularIngredients, setPopularIngredients] = useState<IProducts[]>();
+  const [cocktails, setCocktails] = useState<IProducts[]>();
   const currentPopularCocktail = useUserStore(
     (state) => state.popularCocktails
   );
@@ -123,21 +128,61 @@ export default () => {
     }
   };
 
+  const getCocktail = useCallback(async () => {
+    try {
+      const allCocktails: IProducts[] = [];
+      Array.from({ length: 5 }, (_, i) => String.fromCharCode(97 + i)).map(
+        async (item) => {
+          const data = await loadApi<IRespoonseAllCocktails>({
+            type: "GET",
+            headers: {
+              "access-token": undefined,
+              "Content-Type": "application/json",
+            },
+            instance: "api_cocktail",
+            endpoint: `search.php?f=${item}`,
+          });
+          const drinks = data.drinks;
+          drinks.map((coctel) => {
+            coctel.id = coctel.idDrink || "";
+            coctel.name = coctel.strDrink || "";
+            coctel.imageSrc = coctel.strDrinkThumb || "";
+            coctel.imageAlt = coctel.idDrink || "";
+            coctel.descriptions = coctel.strInstructionsES || "";
+            return coctel;
+          });
+
+          allCocktails.push(...drinks);
+          setCocktails(allCocktails);
+        }
+      );
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
   useEffect(() => {
-    getIngredientsPopular();
     if (currentPopularCocktail.length === 0) {
       getCocktailPopular();
     } else {
       setPopularCocktail(currentPopularCocktail);
     }
+
+    getIngredientsPopular();
+    getCocktail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
     popularCocktail,
     popularIngredients,
+    cocktails,
     goDetails,
     goDetailsIngredients,
-    loading: loadingApi.includes("POST__random.php"),
+    loading:
+      loadingApi.includes("POST__random.php") ||
+      loadingApi.includes("POST__search.php?f=a"),
   };
 };

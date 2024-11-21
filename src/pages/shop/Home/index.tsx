@@ -1,4 +1,4 @@
-import { Backdrop, CardProduct } from "@components";
+import { Backdrop, CardProduct, SliderProduct } from "@components";
 import useHome from "./useHome";
 import { useUserStore } from "@stores";
 
@@ -7,6 +7,7 @@ export const Home = () => {
     popularCocktail,
     popularIngredients,
     loading,
+    cocktails,
     goDetails,
     goDetailsIngredients,
   } = useHome();
@@ -59,6 +60,35 @@ export const Home = () => {
           {popularIngredients?.map((product) => (
             <CardProduct
               key={`ingredients-${product.name}`}
+              product={product}
+              goDetails={goDetailsIngredients}
+            />
+          ))}
+        </div>
+      </div>
+
+      <hr />
+
+      {/* Random Cocktails  */}
+      <div className="p-10">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+          Cocteles
+        </h2>
+        <SliderProduct allCocktais={cocktails || []} goDetails={goDetails} />
+      </div>
+
+      <hr />
+
+      {/* Ramdon Ingredients  */}
+      <div className="p-10">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+          Ingredientes
+        </h2>
+
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {popularIngredients?.map((product) => (
+            <CardProduct
+              key={`ramdon-ingredients-${product.name}`}
               product={product}
               goDetails={goDetailsIngredients}
             />

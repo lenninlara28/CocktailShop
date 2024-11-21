@@ -38,6 +38,7 @@ export interface IProducts {
   strDrinkThumb?: string;
   idDrink?: string;
   strDrink?: string;
+  strInstructionsES?: string;
 }
 
 export interface IDetailsCocktail {
