@@ -21,10 +21,13 @@ export default () => {
   const { loadApi, loadingApi } = useApi();
   const navigate = useNavigate();
   const [popularCocktail, setPopularCocktail] = useState<IProducts[]>();
+  const currentPopularCocktail = useUserStore(
+    (state) => state.popularCocktails
+  );
 
   const getCocktailPopular = useCallback(async () => {
     try {
-      /* In this case, the endpoint for getting a popular cocktail is premium, so I'll request four random cocktails. */
+      /* In this case, the endpoint for getting a popular cocktail is premium, so I'll request four random cocktails and save in localstorage. */
       const cocktail_populars: IProducts[] = [];
       [...Array(4)].map(async () => {
         const data = await loadApi<IResponseCocktailAPI>({
@@ -69,7 +72,11 @@ export default () => {
   };
 
   useEffect(() => {
-    getCocktailPopular();
+    if (currentPopularCocktail.length === 0) {
+      getCocktailPopular();
+    } else {
+      setPopularCocktail(currentPopularCocktail);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

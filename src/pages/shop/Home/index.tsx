@@ -1,8 +1,25 @@
 import { Backdrop, CardProduct } from "@components";
 import useHome from "./useHome";
+import { useUserStore } from "@stores";
 
 export const Home = () => {
   const { popularCocktail, goDetails, loading } = useHome();
+
+  const setPopularCocktailsStorage = useUserStore(
+    ({ setPopularCocktails }) => setPopularCocktails
+  );
+
+  const currentPopularCocktail = useUserStore(
+    (state) => state.popularCocktails
+  );
+
+  if (
+    popularCocktail &&
+    popularCocktail.length === 4 &&
+    currentPopularCocktail.length === 0
+  ) {
+    setPopularCocktailsStorage(popularCocktail);
+  }
 
   return (
     <div className="bg-white overflow-x-hidden">
