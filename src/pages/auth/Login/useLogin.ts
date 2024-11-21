@@ -89,6 +89,7 @@ export default () => {
           nombres: db_dummy.nombres,
           apellidos: db_dummy.apellidos,
           email: db_dummy.email,
+          imagen: data.image,
         },
       });
       navigate("/home");

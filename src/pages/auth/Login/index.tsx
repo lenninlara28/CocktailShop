@@ -9,7 +9,7 @@ export const Login = () => {
     <>
       <Backdrop isLoading={loading} />
       <div
-        className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-screen h-screen bg-no-repeat bg-cover items-center "
+        className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 w-screen h-screen bg-no-repeat bg-cover items-center"
         style={{
           backgroundImage: `url(${BackgroundImg})`,
         }}
@@ -72,7 +72,16 @@ export const Login = () => {
               </div>
             </form>
 
-            <p className="mt-10 text-center text-sm/6">
+            <p className="text-center text-sm/6">
+              <button
+                onClick={() => navigation("/home")}
+                className="font-semibold text-indigo-600 hover:text-indigo-500 bg-white hover:border-white"
+              >
+                Invitado
+              </button>
+            </p>
+
+            <p className="text-center text-sm/6">
               <button
                 onClick={() => navigation("/auth/sign-up")}
                 className="font-semibold text-indigo-600 hover:text-indigo-500 bg-white hover:border-white"

@@ -88,14 +88,9 @@ export default () => {
       });
       signUp(db_dummy);
 
-      enqueueSnackbar(
-        `Usuario registrado exitosamente. 
-        Este usuario ha sido registrado de forma temporal si actualiza la página o cierra la pestaña tendrá que volver a registrarse`,
-        {
-          variant: "success",
-          autoHideDuration: 5000,
-        }
-      );
+      enqueueSnackbar(`Usuario registrado exitosamente.`, {
+        variant: "success",
+      });
       navigate("/auth/login");
     } catch {
       enqueueSnackbar("Ha ocurrido un error", {
