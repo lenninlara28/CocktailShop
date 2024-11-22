@@ -1,6 +1,7 @@
 import { CardProduct } from "@components";
+import { useUserStore } from "@stores";
 import { IProducts } from "interfaces/general";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface SliderProductProps {
   allCocktais: IProducts[];
@@ -15,6 +16,7 @@ export const SliderProduct: React.FC<SliderProductProps> = ({
   const [currentIndex_SM, setCurrentIndex_SM] = useState({ min: 0, max: 1 });
 
   const isSmallScreen = !window.matchMedia("(min-width: 640px)").matches;
+  const filters = useUserStore((state) => state.filters);
 
   const handlePrev = () => {
     if (currentIndex.max === allCocktais.length) {
@@ -73,6 +75,11 @@ export const SliderProduct: React.FC<SliderProductProps> = ({
       });
     }
   };
+
+  useEffect(() => {
+    setCurrentIndex({ min: 0, max: 4 });
+    setCurrentIndex_SM({ min: 0, max: 1 });
+  }, [filters]);
 
   return (
     <div className="relative overflow-hidden w-full mt-8">

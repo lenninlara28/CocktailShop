@@ -11,6 +11,7 @@ export interface State {
   dummyUsers: { users: IUserDummy[] };
   popularCocktails: IProducts[];
   searching: string;
+  filters: string[];
 }
 
 export interface Action {
@@ -19,4 +20,5 @@ export interface Action {
   signUp: (props: { users: IUserDummy[] }) => void;
   setPopularCocktails: (props: IProducts[]) => void;
   setSearching: (searching: string) => void;
+  setFilters: (filters: string[]) => void;
 }

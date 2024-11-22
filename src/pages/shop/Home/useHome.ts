@@ -33,6 +33,17 @@ export default () => {
     (state) => state.popularCocktails
   );
 
+  const [cocktailsAlcoholic, setCocktailsAlcoholic] = useState<IProducts[]>([]);
+  const [cocktailsNoAlcoholic, setCocktailsNoAlcoholic] = useState<IProducts[]>(
+    []
+  );
+  const [cocktailsOrdinaries, setCocktailsOrdinaries] = useState<IProducts[]>(
+    []
+  );
+  const [filterCocktails, setFilterCocktails] = useState<IProducts[]>([]);
+  const [cocktailGlass, setCocktailGlass] = useState<IProducts[]>([]);
+  const [champagneFlute, setChampagneFlute] = useState<IProducts[]>([]);
+
   const getCocktailPopular = useCallback(async () => {
     try {
       /* In this case, the endpoint for getting a popular cocktail is premium, so I'll request four random cocktails and save in localstorage. */
@@ -197,6 +208,180 @@ export default () => {
     }
   }, [loadApi]);
 
+  const getCocktailAlcoholic = useCallback(async () => {
+    try {
+      const data = await loadApi<IRespoonseAllCocktails>({
+        type: "GET",
+        headers: {
+          "access-token": undefined,
+          "Content-Type": "application/json",
+        },
+        instance: "api_cocktail",
+        endpoint: `filter.php?a=Alcoholic`,
+      });
+      const drinks = data.drinks;
+      drinks.map((coctel) => {
+        coctel.id = coctel.idDrink || "";
+        coctel.name = coctel.strDrink || "";
+        coctel.imageSrc = coctel.strDrinkThumb || "";
+        coctel.imageAlt = coctel.strDrink || "";
+        coctel.descriptions = coctel.strInstructionsES || "";
+        return coctel;
+      });
+
+      setCocktailsAlcoholic([...drinks]);
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
+  const getCocktailNoAlcoholic = useCallback(async () => {
+    try {
+      const data = await loadApi<IRespoonseAllCocktails>({
+        type: "GET",
+        headers: {
+          "access-token": undefined,
+          "Content-Type": "application/json",
+        },
+        instance: "api_cocktail",
+        endpoint: `filter.php?a=Non_Alcoholic`,
+      });
+      const drinks = data.drinks;
+      drinks.map((coctel) => {
+        coctel.id = coctel.idDrink || "";
+        coctel.name = coctel.strDrink || "";
+        coctel.imageSrc = coctel.strDrinkThumb || "";
+        coctel.imageAlt = coctel.strDrink || "";
+        coctel.descriptions = coctel.strInstructionsES || "";
+        return coctel;
+      });
+
+      setCocktailsNoAlcoholic([...drinks]);
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
+  const getCocktailOrdinaries = useCallback(async () => {
+    try {
+      const data = await loadApi<IRespoonseAllCocktails>({
+        type: "GET",
+        headers: {
+          "access-token": undefined,
+          "Content-Type": "application/json",
+        },
+        instance: "api_cocktail",
+        endpoint: `filter.php?c=Ordinary_Drink`,
+      });
+      const drinks = data.drinks;
+      drinks.map((coctel) => {
+        coctel.id = coctel.idDrink || "";
+        coctel.name = coctel.strDrink || "";
+        coctel.imageSrc = coctel.strDrinkThumb || "";
+        coctel.imageAlt = coctel.strDrink || "";
+        coctel.descriptions = coctel.strInstructionsES || "";
+        return coctel;
+      });
+
+      setCocktailsOrdinaries([...drinks]);
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
+  const getCocktailFilter = useCallback(async () => {
+    try {
+      const data = await loadApi<IRespoonseAllCocktails>({
+        type: "GET",
+        headers: {
+          "access-token": undefined,
+          "Content-Type": "application/json",
+        },
+        instance: "api_cocktail",
+        endpoint: `filter.php?c=Cocktail`,
+      });
+      const drinks = data.drinks;
+      drinks.map((coctel) => {
+        coctel.id = coctel.idDrink || "";
+        coctel.name = coctel.strDrink || "";
+        coctel.imageSrc = coctel.strDrinkThumb || "";
+        coctel.imageAlt = coctel.strDrink || "";
+        coctel.descriptions = coctel.strInstructionsES || "";
+        return coctel;
+      });
+
+      setFilterCocktails([...drinks]);
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
+  const getCocktaiGlass = useCallback(async () => {
+    try {
+      const data = await loadApi<IRespoonseAllCocktails>({
+        type: "GET",
+        headers: {
+          "access-token": undefined,
+          "Content-Type": "application/json",
+        },
+        instance: "api_cocktail",
+        endpoint: `filter.php?g=Cocktail_glass`,
+      });
+      const drinks = data.drinks;
+      drinks.map((coctel) => {
+        coctel.id = coctel.idDrink || "";
+        coctel.name = coctel.strDrink || "";
+        coctel.imageSrc = coctel.strDrinkThumb || "";
+        coctel.imageAlt = coctel.strDrink || "";
+        coctel.descriptions = coctel.strInstructionsES || "";
+        return coctel;
+      });
+
+      setCocktailGlass([...drinks]);
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
+  const getChampagneFlute = useCallback(async () => {
+    try {
+      const data = await loadApi<IRespoonseAllCocktails>({
+        type: "GET",
+        headers: {
+          "access-token": undefined,
+          "Content-Type": "application/json",
+        },
+        instance: "api_cocktail",
+        endpoint: `filter.php?g=Champagne_flute`,
+      });
+      const drinks = data.drinks;
+      drinks.map((coctel) => {
+        coctel.id = coctel.idDrink || "";
+        coctel.name = coctel.strDrink || "";
+        coctel.imageSrc = coctel.strDrinkThumb || "";
+        coctel.imageAlt = coctel.strDrink || "";
+        coctel.descriptions = coctel.strInstructionsES || "";
+        return coctel;
+      });
+
+      setChampagneFlute([...drinks]);
+    } catch {
+      return enqueueSnackbar("Ha ocurrido un error", {
+        variant: "error",
+      });
+    }
+  }, [loadApi]);
+
   useEffect(() => {
     if (currentPopularCocktail.length === 0) {
       getCocktailPopular();
@@ -217,6 +402,25 @@ export default () => {
     ingredients,
     goDetails,
     goDetailsIngredients,
+    /* Filters */
+    cocktailsAlcoholic,
+    setCocktailsAlcoholic,
+    getCocktailAlcoholic,
+    cocktailsNoAlcoholic,
+    setCocktailsNoAlcoholic,
+    getCocktailNoAlcoholic,
+    cocktailsOrdinaries,
+    setCocktailsOrdinaries,
+    getCocktailOrdinaries,
+    filterCocktails,
+    setFilterCocktails,
+    getCocktailFilter,
+    cocktailGlass,
+    setCocktailGlass,
+    getCocktaiGlass,
+    champagneFlute,
+    setChampagneFlute,
+    getChampagneFlute,
     loading:
       loadingApi.includes("POST__random.php") ||
       loadingApi.includes("POST__search.php?f=a"),
