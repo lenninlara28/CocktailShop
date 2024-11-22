@@ -12,6 +12,9 @@ export const SliderProduct: React.FC<SliderProductProps> = ({
   goDetails,
 }) => {
   const [currentIndex, setCurrentIndex] = useState({ min: 0, max: 4 });
+  const [currentIndex_SM, setCurrentIndex_SM] = useState({ min: 0, max: 1 });
+
+  const isSmallScreen = !window.matchMedia("(min-width: 640px)").matches;
 
   const handlePrev = () => {
     if (currentIndex.max === allCocktais.length) {
@@ -40,11 +43,43 @@ export const SliderProduct: React.FC<SliderProductProps> = ({
       });
     }
   };
+
+  const handlePrev_SM = () => {
+    if (currentIndex_SM.max === allCocktais.length) {
+      setCurrentIndex_SM({
+        min: currentIndex_SM.min - 1,
+        max: currentIndex_SM.min,
+      });
+    } else {
+      setCurrentIndex_SM({
+        min: currentIndex_SM.min - 1,
+        max: currentIndex_SM.max - 1,
+      });
+    }
+  };
+
+  const handleNext_SM = () => {
+    if (currentIndex_SM.max + 1 < allCocktais.length) {
+      setCurrentIndex_SM({
+        min: currentIndex_SM.max,
+        max: currentIndex_SM.max + 1,
+      });
+    } else {
+      setCurrentIndex_SM({
+        min: currentIndex_SM.max,
+        max: allCocktais.length,
+      });
+    }
+  };
+
   return (
     <div className="relative overflow-hidden w-full mt-8">
-      <div className="grid grid-cols-5 ml-52 gap-5 transition-transform duration-500 ease-in-out">
+      <div className="grid grid-cols-1 lg:grid-cols-5 lg:ml-52 gap-5 transition-transform duration-500 ease-in-out">
         {allCocktais
-          .slice(currentIndex.min, currentIndex.max)
+          .slice(
+            isSmallScreen ? currentIndex_SM.min : currentIndex.min,
+            isSmallScreen ? currentIndex_SM.max : currentIndex.max
+          )
           .map((product) => (
             <CardProduct
               key={`ingredients-${product.name}`}
@@ -57,15 +92,21 @@ export const SliderProduct: React.FC<SliderProductProps> = ({
       {/* Buttons */}
       <button
         className="absolute top-1/2 transform -translate-y-1/2 bg-gray-800 text-white rounded-full hover:bg-gray-700"
-        onClick={handlePrev}
-        disabled={currentIndex.min === 0}
+        onClick={isSmallScreen ? handlePrev_SM : handlePrev}
+        disabled={
+          isSmallScreen ? currentIndex_SM.min === 0 : currentIndex.min === 0
+        }
       >
         &#8249;
       </button>
       <button
         className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white rounded-full hover:bg-gray-700"
-        onClick={handleNext}
-        disabled={currentIndex.max === allCocktais.length}
+        onClick={isSmallScreen ? handleNext_SM : handleNext}
+        disabled={
+          isSmallScreen
+            ? currentIndex_SM.max === allCocktais.length
+            : currentIndex.max === allCocktais.length
+        }
       >
         &#8250;
       </button>
