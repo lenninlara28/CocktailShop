@@ -23,17 +23,6 @@ cd <project-folder>
 
 ### 2. Install dependencies
 
-Using npm:
-
-```bash
-npm install
-```
-
-Using yarn:
-
-```bash
-yarn install
-```
 
 Using pnpm:
 
@@ -44,18 +33,6 @@ pnpm install
 ### 3. Start the development server
 
 To run the development server, use:
-
-```bash
-npm run dev
-```
-
-or
-
-```bash
-yarn dev
-```
-
-or
 
 ```bash
 pnpm dev
@@ -69,48 +46,6 @@ After starting the server, open your browser and navigate to:
 http://localhost:5173
 ```
 
-### 5. Build for production
-
-To create a production-ready build, run:
-
-```bash
-npm run build
-```
-
-or
-
-```bash
-yarn build
-```
-
-or
-
-```bash
-pnpm build
-```
-
-The output will be in the `dist` folder.
-
-### 6. Preview the production build
-
-To preview the production build locally, run:
-
-```bash
-npm run preview
-```
-
-or
-
-```bash
-yarn preview
-```
-
-or
-
-```bash
-pnpm preview
-```
-
 ## Project Structure
 
 Below is an example of the default file structure for a Vite + React project:
@@ -120,9 +55,16 @@ Below is an example of the default file structure for a Vite + React project:
 ├── src/
 │   ├── assets/      # Images, fonts, etc.
 │   ├── components/  # Reusable React components
+│   ├── hooks/       # Reusable React hooks
+│   ├── interfaces/  # Types of objects
+│   ├── pages/       # Views the proyect
+│   ├── routes/      # Routers
+│   ├── stores/      # localstorage objects global
+│   ├── utils/       # Reusable funtions utils
+│   ├── App.css      # Styles
 │   ├── App.jsx      # Main application component
-│   ├── main.jsx     # Entry point
 │   └── index.css    # Global styles
+│   ├── main.jsx     # Entry point
 ├── .gitignore
 ├── package.json
 ├── README.md
