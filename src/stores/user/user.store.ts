@@ -11,6 +11,7 @@ const initialState: State = {
   user: null,
   dummyUsers: dataDummy,
   popularCocktails: [],
+  searching: "",
 };
 
 const storeAPI: StateCreator<State & Action, [["zustand/devtools", never]]> = (
@@ -24,6 +25,8 @@ const storeAPI: StateCreator<State & Action, [["zustand/devtools", never]]> = (
   updateUser: (user: User) => set(() => ({ user }), false, "updateUser"),
   setPopularCocktails: (popularCocktails: IProducts[]) =>
     set(() => ({ popularCocktails }), false, "setPopularCocktails"),
+  setSearching: (searching: string) =>
+    set(() => ({ searching }), false, "setSeatching"),
 });
 
 export const useUserStore = create<State & Action>()(

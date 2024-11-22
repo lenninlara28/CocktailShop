@@ -10,6 +10,7 @@ export interface State {
   token: string | null;
   dummyUsers: { users: IUserDummy[] };
   popularCocktails: IProducts[];
+  searching: string;
 }
 
 export interface Action {
@@ -17,4 +18,5 @@ export interface Action {
   logOut: (props: State) => void;
   signUp: (props: { users: IUserDummy[] }) => void;
   setPopularCocktails: (props: IProducts[]) => void;
+  setSearching: (searching: string) => void;
 }
