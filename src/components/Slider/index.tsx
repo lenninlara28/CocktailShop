@@ -14,8 +14,10 @@ export const SliderProduct: React.FC<SliderProductProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState({ min: 0, max: 4 });
   const [currentIndex_SM, setCurrentIndex_SM] = useState({ min: 0, max: 1 });
+  const [isSmallScreen, setIsSmallScreen] = useState(
+    !window.matchMedia("(min-width: 640px)").matches
+  );
 
-  const isSmallScreen = !window.matchMedia("(min-width: 640px)").matches;
   const filters = useUserStore((state) => state.filters);
 
   const handlePrev = () => {
@@ -80,6 +82,17 @@ export const SliderProduct: React.FC<SliderProductProps> = ({
     setCurrentIndex({ min: 0, max: 4 });
     setCurrentIndex_SM({ min: 0, max: 1 });
   }, [filters]);
+
+  const changeView = () => {
+    setIsSmallScreen(!window.matchMedia("(min-width: 640px)").matches);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", changeView);
+    return () => {
+      window.removeEventListener("resize", changeView);
+    };
+  }, []);
 
   return (
     <div className="relative overflow-hidden w-full mt-8">
