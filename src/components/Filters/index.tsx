@@ -37,6 +37,15 @@ export const Filters: React.FC = () => {
     );
   };
 
+  const clearFilter = () => {
+    options.map((item) => {
+      item.selected = false;
+      return item;
+    });
+    setOptions([...options]);
+    setFilters([]);
+  };
+
   useEffect(() => {
     setFilters([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,7 +53,7 @@ export const Filters: React.FC = () => {
 
   return (
     <div>
-      <div className="p-5 pb-0 flex w-screen justify-end">
+      <div className="p-5 pb-0 flex justify-end">
         <button
           onClick={() => handleOpenFilters()}
           className="rounded-full bg-white border-none text-black ml-1 flex items-center gap-1"
@@ -84,6 +93,13 @@ export const Filters: React.FC = () => {
               className="rounded-full bg-black border-none text-white mr-5 mb-1"
             >
               Filtrar
+            </button>
+
+            <button
+              onClick={() => clearFilter()}
+              className="rounded-full bg-white border-none text-black mr-5 mb-1"
+            >
+              Limpiar
             </button>
           </div>
         </div>
