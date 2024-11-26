@@ -80,7 +80,7 @@ export const Layout: React.FC<Props> = ({ children, user, logout }) => {
           <Search />
 
           {/* User */}
-          <div className="-m-1.5 p-1.5 flex flex-col">
+          <div className="-m-1.5 p-1.5 flex flex-col relative">
             {user ? (
               <div
                 className="-m-1.5 p-1.5 flex flex-row items-center gap-3 cursor-pointer"
