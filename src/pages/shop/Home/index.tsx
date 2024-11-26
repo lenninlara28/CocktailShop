@@ -98,44 +98,58 @@ export const Home = () => {
           )}
 
           {/* Popular Cocktail */}
-          {searching === "" && (
-            <div className="p-10">
-              <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-                Cocteles Populares
-              </h2>
 
-              <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                {popularCocktail?.map((product) => (
+          <div className="p-10">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+              Cocteles Populares
+            </h2>
+
+            <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+              {popularCocktail
+                ?.filter((item) =>
+                  searching !== ""
+                    ? item.name
+                        ?.toLowerCase()
+                        ?.includes(searching.toLowerCase())
+                    : true
+                )
+                ?.map((product) => (
                   <CardProduct
                     key={`index-${product.id}`}
                     product={product}
                     goDetails={goDetails}
                   />
                 ))}
-              </div>
             </div>
-          )}
+          </div>
 
           <hr />
 
           {/* Popular Ingredients  */}
-          {searching === "" && (
-            <div className="p-10">
-              <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-                Ingredientes Populares
-              </h2>
 
-              <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 justify-center sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                {popularIngredients?.map((product) => (
+          <div className="p-10">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+              Ingredientes Populares
+            </h2>
+
+            <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 justify-center sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+              {popularIngredients
+                ?.filter((item) =>
+                  searching !== ""
+                    ? item.name
+                        ?.toLowerCase()
+                        ?.includes(searching.toLowerCase())
+                    : true
+                )
+                ?.map((product) => (
                   <CardProduct
                     key={`ingredients-${product.name}`}
                     product={product}
                     goDetails={goDetailsIngredients}
                   />
                 ))}
-              </div>
             </div>
-          )}
+          </div>
 
           <hr />
 
