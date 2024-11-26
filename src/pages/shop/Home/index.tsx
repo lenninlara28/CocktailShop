@@ -82,7 +82,7 @@ export const Home = () => {
   }, [filters]);
 
   return (
-    <div className="bg-white overflow-x-hidden">
+    <div className="bg-white overflow-x-hidden max-w-[1230px] mx-auto">
       <Backdrop isLoading={loading} />
       {/* Filter */}
       <Filters />
@@ -125,7 +125,7 @@ export const Home = () => {
                 Ingredientes Populares
               </h2>
 
-              <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+              <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 justify-center sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 {popularIngredients?.map((product) => (
                   <CardProduct
                     key={`ingredients-${product.name}`}

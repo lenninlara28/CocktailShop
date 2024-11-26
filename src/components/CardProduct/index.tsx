@@ -15,7 +15,7 @@ export const CardProduct: React.FC<CardProductProps> = ({
   return (
     <div
       key={product.id}
-      className="group relative cursor-pointer max-h-sm"
+      className="group relative cursor-pointer max-w-sm"
       onClick={() =>
         goDetails(
           product.id === "" ? `${product.name}*${product.imageSrc}` : product.id
@@ -27,7 +27,7 @@ export const CardProduct: React.FC<CardProductProps> = ({
         src={product.imageSrc}
         className={`aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-${
           small ? 48 : 80
-        }`}
+        } max-w-96`}
       />
       <div className="mt-4 flex justify-between">
         <div>
